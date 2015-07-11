@@ -8,6 +8,10 @@
       public function index(){
         return View::create(array('title' => 'Error', 'message' => 'Unexcepted error occured.'));
       }
+      
+      public function notFound(){
+        return View::create(array('title' => 'Error', 'message' => 'Page not found.'));
+      }
     }
   }
 

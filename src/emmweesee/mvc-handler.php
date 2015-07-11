@@ -14,7 +14,7 @@
         $factory = $this->factory($route->controller());
         $controller = $factory->invoke();
         $controller->context = $this->httpContext;
-        $view = call_user_func(array($controller, $route->action()), $route->parameters());
+        $view = call_user_func_array(array($controller, $this->action($route->action())), $route->parameters());
         $view->context = $this->httpContext;
         $view->compile();
         $this->header($view);
@@ -28,6 +28,19 @@
           if($factory->support($controller)) return $factory;
         }
         throw new \Exception('Could not resolve the requested controller.');
+      }
+      
+      private function action($action){
+        $invoke = '';
+        $total = strlen($action);
+        $prev = '';
+        for($index = 0; $index < $total; ++$index){
+          $character = $action[$index];
+          $fix = ($character === '-' && $prev != '-') ? true : false;
+          if(!$fix) $invoke .= ($prev === '-') ? strtoupper($character) : $character;
+          $prev = $character;
+        }
+        return $invoke;
       }
       
       private function header($view){

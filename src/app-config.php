@@ -7,6 +7,7 @@
   use emmweesee\MvcHandler;
   use api\Api;
   use dashboard\Dashboard;
+  use entry\Entry;
   use error\Error;
   
   class ApiFactory implements IControllerFactory{
@@ -17,6 +18,11 @@
   class DashboardFactory implements IControllerFactory{
     public function invoke(){ return new Dashboard(); }
     public function support($name){ return ('dashboard' === $name); }
+  }
+  
+  class EntryFactory implements IControllerFactory{
+    public function invoke(){ return new Entry(); }
+    public function support($name){ return ('entry' === $name); }
   }
   
   class ErrorFactory implements IControllerFactory{
@@ -36,6 +42,7 @@
       $instance = new ControllerFactoryContainer();
       $instance->register(new ApiFactory());
       $instance->register(new DashboardFactory());
+      $instance->register(new EntryFactory());
       $instance->register(new ErrorFactory());
       return $instance;
     }

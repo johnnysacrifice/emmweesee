@@ -35,7 +35,7 @@
       }
       
       private static function resolve($view = ''){
-        list($controller, $view, $trace) = array('', strtolower($view), debug_backtrace());
+        list($controller, $view, $trace) = array('', $view, debug_backtrace());
         if(is_array($trace) && count($trace) > 2){
           $controller = self::resolveController($trace);
           $view = ($view === '') ? self::resolveView($trace) : $view;
@@ -51,7 +51,20 @@
       }
       
       private static function resolveView($trace){
-        return strtolower($trace[2]['function']);
+        $view = '';
+        $name = $trace[2]['function'];
+        $total = strlen($name);
+        for($index = 0; $index < $total; ++$index){
+          $character = $name[$index];
+          $upper = ctype_upper($character);
+          if($upper){
+            $view .= '-';
+            $view .= strtolower($character);
+          }else{
+            $view .= $character;
+          }
+        }
+        return $view;
       }
       
       public function compile(){
