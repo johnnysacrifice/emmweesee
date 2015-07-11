@@ -1,0 +1,8 @@
+{
+  "name" : "bootstrap-sticky-starter-kit",
+  "dependencies" : {
+    "bootstrap" : "*",
+    "html5shiv" : "*",
+    "respond" : "*"
+  }
+}

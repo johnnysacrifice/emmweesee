@@ -1,0 +1,8 @@
+{
+  "assemblies" : {
+    "api" : "./api",
+    "dashboard" : "./dashboard",
+    "error" : "./error",
+    "emmweesee" : "./emmweesee"
+  }
+}
