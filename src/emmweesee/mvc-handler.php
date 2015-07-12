@@ -47,7 +47,7 @@
       
       private function header($view){
         $context = $this->httpContext;
-        if($view->header() === View::HEADER_JSON) $context->header('content-type', 'application/json');
+        if($view->header() === $view::HEADER_JSON) $context->header('content-type', 'application/json');
       }
       
       private function render($view){

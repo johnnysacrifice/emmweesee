@@ -3,8 +3,8 @@
   namespace emmweesee{
     class InlineViewRenderer implements IViewRenderer{
       public function render(IView $view){
-        if($view->template() !== '') $this->renderHTML($view);
-        else $this->renderJSON($view);
+        if($view->header() === $view::HEADER_JSON) $this->renderJSON($view);
+        else $this->renderHTML($view);
       }
       
       private function renderHTML(IView $view){
