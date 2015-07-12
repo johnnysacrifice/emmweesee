@@ -17,7 +17,6 @@
       private function __construct($model){
         $this->model = $model;
         $this->template = '';
-        $this->compiled = '';
         $this->content = '';
       }
       
@@ -35,7 +34,7 @@
       }
       
       private static function resolve($view = ''){
-        list($controller, $view, $trace) = array('', $view, debug_backtrace());
+        list($controller, $view, $trace) = array('', $view, debug_backtrace(true, 10));
         if(is_array($trace) && count($trace) > 2){
           $controller = self::resolveController($trace);
           $view = ($view === '') ? self::resolveView($trace) : $view;
@@ -67,36 +66,11 @@
         return $view;
       }
       
-      public function compile(){
-        if($this->template !== '') $this->compileHTML();
-        else $this->compileJSON();
-      }
-      
-      private function compileHTML(){
-        $model = $this->dynamic();
-        ob_start();
-        require $this->template;
-        $this->compiled = ob_get_clean();
-      }
-      
-      private function section($view){
-        $model = $this->dynamic();
-        require sprintf('%s/%s.html.php', _, $view);
-      }
-      
-      private function compileJSON(){ $this->compiled = $this->json(); }
-      
-      private function dynamic(){ return json_decode(json_encode($this->model)); }
-      
-      private function json(){ return json_encode($this->model); }
-      
-      public function render(){ echo $this->compiled(); }
+      public function context() { return $this->context; }
       
       public function model() { return $this->model; }
       
       public function template() { return $this->template; }
-      
-      public function compiled() { return $this->compiled; }
       
       public function header() { return $this->header; }
     }

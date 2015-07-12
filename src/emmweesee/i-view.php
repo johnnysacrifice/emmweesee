@@ -2,11 +2,9 @@
 
   namespace emmweesee{
     interface IView{
-      public function compile();
-      public function render();
+      public function context();
       public function model();
       public function template();
-      public function compiled();
       public function header();
     }
   }

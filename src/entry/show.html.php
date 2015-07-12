@@ -1,4 +1,4 @@
-<?php $this->section('shared/header'); ?>
+<?php $section('shared/header'); ?>
 <div class="container-fluid">
   <h1><?php echo $model->title; ?></h1>
   <hr>
@@ -13,4 +13,4 @@
   <p>Illi enim inter se dissentiunt. Efficiens dici potest. Equidem e Cn. Ut id aliis narrare gestiant? Tum Torquatus: Prorsus, inquit, assentior; Ergo, inquit, tibi Q. </p>
   <p>Poterat autem inpune; Quid ergo? Age sane, inquam. Erat enim Polemonis. Quodsi ipsam honestatem undique pertectam atque absolutam. Est, ut dicis, inquam. </p>
 </div>
-<?php $this->section('shared/footer'); ?>
+<?php $section('shared/footer'); ?>

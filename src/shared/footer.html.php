@@ -1,4 +1,4 @@
-<?php $baseUrl = $this->context->baseUrl(); ?>
+<?php $baseUrl = $context->baseUrl(); ?>
     </div>
     <footer class="x-app-footer footer">
       <div class="container-fluid">

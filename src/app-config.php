@@ -4,7 +4,6 @@
   use emmweesee\HttpContext;
   use emmweesee\IControllerFactory;
   use emmweesee\ControllerFactoryContainer;
-  use emmweesee\MvcHandler;
   use api\Api;
   use dashboard\Dashboard;
   use entry\Entry;

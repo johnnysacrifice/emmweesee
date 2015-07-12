@@ -1,4 +1,4 @@
-<?php $baseUrl = $this->context->baseUrl(); ?>
+<?php $baseUrl = $context->baseUrl(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

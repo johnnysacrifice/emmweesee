@@ -4,10 +4,13 @@
     class MvcHandler{
       private $httpContext;
       private $controllerFactoryContainer;
+      private $viewRenderer;
       
-      public function __construct(IHttpContext $httpContext, IControllerFactoryContainer $controllerFactoryContainer){
+      public function __construct
+        (IHttpContext $httpContext, IControllerFactoryContainer $controllerFactoryContainer, IViewRenderer $viewRenderer){
         $this->httpContext = $httpContext;
         $this->controllerFactoryContainer = $controllerFactoryContainer;
+        $this->viewRenderer = $viewRenderer;
       }
       
       public function handle(Route $route){
@@ -16,9 +19,8 @@
         $controller->context = $this->httpContext;
         $view = call_user_func_array(array($controller, $this->action($route->action())), $route->parameters());
         $view->context = $this->httpContext;
-        $view->compile();
         $this->header($view);
-        $view->render();
+        $this->render($view);
       }
       
       private function factory($controller){
@@ -46,6 +48,11 @@
       private function header($view){
         $context = $this->httpContext;
         if($view->header() === View::HEADER_JSON) $context->header('content-type', 'application/json');
+      }
+      
+      private function render($view){
+        $renderer = $this->viewRenderer;
+        $renderer->render($view);
       }
     }
   }
