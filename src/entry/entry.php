@@ -1,6 +1,6 @@
 <?php
 
-  namespace entry{
+  namespace myapp\entry{
     use emmweesee\Controller;
     use emmweesee\View;
     

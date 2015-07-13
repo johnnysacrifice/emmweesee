@@ -15,6 +15,7 @@
   use emmweesee\Route;
   use emmweesee\Router;
   use emmweesee\MvcHandler;
+  use myapp\AppConfig;
   
   set_error_handler(array(new ErrorHandler, 'handle'));
 

@@ -1,6 +1,6 @@
 <?php
 
-  namespace dashboard{
+  namespace myapp\dashboard{
     use emmweesee\Controller;
     use emmweesee\View;
     

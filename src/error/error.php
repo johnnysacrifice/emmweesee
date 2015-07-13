@@ -1,6 +1,6 @@
 <?php
 
-  namespace error{
+  namespace myapp\error{
     use emmweesee\Controller;
     use emmweesee\View;
     

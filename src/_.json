@@ -1,9 +1,6 @@
 {
   "assemblies" : {
-    "api" : "./api",
-    "dashboard" : "./dashboard",
-    "entry" : "./entry",
-    "error" : "./error",
+    "myapp" : ".",
     "emmweesee" : "./emmweesee"
   }
 }
