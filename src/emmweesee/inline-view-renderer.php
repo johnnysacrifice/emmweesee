@@ -8,17 +8,22 @@
       }
       
       private function renderHTML(IView $view){
-        $context = $view->context();
-        $model = $this->dynamic($view->model());
-        $section = function($view) use ($context, $model) { $this->section($model, $view, $context); };
-        ob_start();
-        require $view->template();
-        $compiled = ob_get_clean();
-        echo $compiled;
+        list($context, $model, $template) = array($view->context(), $this->dynamic($view->model()), $view->template());
+        $section = $this->section($context, $model);
+        $scope = static function() use ($context, $model, $template, $section){
+          ob_start();
+          require $template;;
+          $compiled = ob_get_clean();
+          echo $compiled;
+        };
+        $scope();
       }
       
-      private function section($model, $view, $context){
-        require sprintf('%s/%s.html.php', _, $view);
+      private function section($context, $model){
+        $section = static function($view) use ($context, $model){
+          require sprintf('%s/%s.html.php', _, $view);
+        };
+        return $section;
       }
       
       private function renderJSON(IView $view){
