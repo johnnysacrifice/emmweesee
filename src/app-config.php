@@ -1,8 +1,7 @@
 <?php
 
   namespace myapp{
-    use emmweesee\HttpServer;
-    use emmweesee\HttpContext;
+    use emmweesee\Route;
     use emmweesee\IControllerFactory;
     use emmweesee\ControllerFactoryContainer;
     use myapp\api\Api;
@@ -33,11 +32,10 @@
     class AppConfig{
       public function __construct(){}
       
-      public static function context(){
-        $instance = new HttpContext(new HttpServer());
-        return $instance;
+      public function route(){
+        return new Route('dashboard', 'index', array());
       }
-      
+
       public function container(){
         $instance = new ControllerFactoryContainer();
         $instance->register(new ApiFactory());

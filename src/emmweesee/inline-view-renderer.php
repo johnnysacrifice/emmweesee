@@ -11,10 +11,15 @@
         list($context, $model, $template) = array($view->context(), $this->dynamic($view->model()), $view->template());
         $section = $this->section($context, $model);
         $scope = static function() use ($context, $model, $template, $section){
-          ob_start();
-          require $template;;
-          $compiled = ob_get_clean();
-          echo $compiled;
+          try{
+            ob_start();
+            require $template;;
+            $compiled = ob_get_clean();
+            echo $compiled;
+          }catch(\Exception $e){
+            ob_get_clean();
+            throw $e;
+          }
         };
         $scope();
       }
