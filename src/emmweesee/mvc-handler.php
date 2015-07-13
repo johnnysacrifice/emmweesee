@@ -17,7 +17,7 @@
         $factory = $this->factory($route->controller());
         $controller = $factory->invoke();
         $controller->context = $this->httpContext;
-        $view = call_user_func_array(array($controller, $this->action($route->action())), $route->parameters());
+        $view = $this->view($controller, $this->action($route->action()), $route->parameters());
         $view->context = $this->httpContext;
         $this->header($view);
         $this->render($view);
@@ -29,7 +29,16 @@
           $factory = $factories[$index];
           if($factory->support($controller)) return $factory;
         }
-        throw new \Exception('Could not resolve the requested controller.');
+        throw new UnhandledRequestException('Could not resolve the requested controller.');
+      }
+      
+      private function view($controller, $action, $parameters){
+        if(method_exists($controller, $action)){
+          $view = call_user_func_array(array($controller, $action), $parameters);
+          $view->context = $this->httpContext;
+          return $view;
+        }
+        throw new UnhandledRequestException('Could not resolve the requested action.');
       }
       
       private function action($action){
