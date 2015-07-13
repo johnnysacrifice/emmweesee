@@ -1,16 +1,16 @@
 <?php
 
   namespace emmweesee{
-    class Debugger implements IDebugger{
-      public function show(\Exception $e){
+    class InlineDebugger implements IDebugger{
+      public function show($title, \Exception $e){
 ?>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Exception</title>
+    <title><?php echo $title; ?></title>
   </head>
   <body>
-    <h1>Exception</h1>
+    <h1><?php echo $title; ?></h1>
     <hr>
     <pre>
 <?php var_dump($e); ?>

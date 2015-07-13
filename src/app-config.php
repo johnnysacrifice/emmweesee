@@ -1,13 +1,18 @@
 <?php
 
   namespace myapp{
-    use emmweesee\Route;
-    use emmweesee\IControllerFactory;
-    use emmweesee\ControllerFactoryContainer;
-    use myapp\api\Api;
-    use myapp\dashboard\Dashboard;
-    use myapp\entry\Entry;
-    use myapp\error\Error;
+    if(!defined('debug')) define('debug', false);
+    
+    use
+      emmweesee\StandaloneDebugger,
+      emmweesee\InlineDebugger,
+      emmweesee\Route,
+      emmweesee\IControllerFactory,
+      emmweesee\ControllerFactoryContainer,
+      myapp\api\Api,
+      myapp\dashboard\Dashboard,
+      myapp\entry\Entry,
+      myapp\error\Error;
     
     class ApiFactory implements IControllerFactory{
       public function invoke(){ return new Api(); }
@@ -31,6 +36,12 @@
   
     class AppConfig{
       public function __construct(){}
+      
+      public function debugger(){
+        if(debug)
+          return new InlineDebugger();
+        return new StandaloneDebugger();
+      }
       
       public function route(){
         return new Route('dashboard', 'index', array());

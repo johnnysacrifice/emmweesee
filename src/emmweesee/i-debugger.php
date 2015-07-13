@@ -2,7 +2,7 @@
 
   namespace emmweesee{
     interface IDebugger{
-      public function show(\Exception $e);
+      public function show($message, \Exception $e);
     }
   }
 
